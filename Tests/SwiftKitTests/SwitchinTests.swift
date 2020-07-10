@@ -18,10 +18,30 @@ final class SwitchinTests: XCTestCase {
                                         0: false,
                                         3.14: false,
                                         "qwerty": true
-                                     ],
+            ],
                                      default: nil)
         
         XCTAssertEqual(switchedValue, true)
+    }
+    
+    func testSwitchinClosure() {
+        enum Example {
+            case a, b, c, d
+        }
+        
+        let value: Example = .c
+        
+        switchin(value: value,
+                 cases: [
+                    .a: {
+                        XCTFail()
+                    },
+                    .b: {
+                        XCTFail()
+                    }
+            ],default:  {
+                XCTAssert(true)
+        })
     }
     
     func testSwitchinArray() {
@@ -53,6 +73,8 @@ final class SwitchinTests: XCTestCase {
     
     static var allTests = [
         ("testSwitchin", testSwitchin),
+        ("testSwitchinClosure", testSwitchinClosure),
         ("testSwitchinArray", testSwitchinArray),
+        ("testSwitchinString", testSwitchinString)
     ]
 }
