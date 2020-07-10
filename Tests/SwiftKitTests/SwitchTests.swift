@@ -1,5 +1,5 @@
 //
-//  SwitchinTests.swift
+//  SwitchTests.swift
 //  
 //
 //  Created by Zach Eriksen on 7/7/20.
@@ -8,12 +8,12 @@
 import XCTest
 @testable import SwiftKit
 
-final class SwitchinTests: XCTestCase {
+final class SwitchTests: XCTestCase {
     
-    func testSwitchin() {
+    func test_switchmap() {
         let value = "qwerty"
         
-        let switchedValue = switchin(value: value,
+        let switchedValue = switchmap(value: value,
                                      cases: [
                                         0: false,
                                         3.14: false,
@@ -24,14 +24,14 @@ final class SwitchinTests: XCTestCase {
         XCTAssertEqual(switchedValue, true)
     }
     
-    func testSwitchinClosure() {
+    func test_switcheach() {
         enum Example {
             case a, b, c, d
         }
         
         let value: Example = .c
         
-        switchin(value: value,
+        switcheach(value: value,
                  cases: [
                     .a: {
                         XCTFail()
@@ -44,10 +44,10 @@ final class SwitchinTests: XCTestCase {
         })
     }
     
-    func testSwitchinArray() {
+    func test_switchmapArray() {
         let list = [1, 2, 3]
         
-        let switchedList = list.switchin(cases: [
+        let switchedList = list.switchmap(cases: [
             0: "zero",
             1: "one",
             2: "two",
@@ -57,10 +57,10 @@ final class SwitchinTests: XCTestCase {
         XCTAssertEqual(switchedList, ["one", "two", "three"])
     }
     
-    func testSwitchinString() {
+    func test_switchmapString() {
         let list = "123"
         
-        let switchedList = list.switchin(cases: [
+        let switchedList = list.switchmap(cases: [
             "0": "zero",
             "1": "one",
             "2": "two",
@@ -72,9 +72,9 @@ final class SwitchinTests: XCTestCase {
     
     
     static var allTests = [
-        ("testSwitchin", testSwitchin),
-        ("testSwitchinClosure", testSwitchinClosure),
-        ("testSwitchinArray", testSwitchinArray),
-        ("testSwitchinString", testSwitchinString)
+        ("test_switchin", test_switchmap),
+        ("test_switchinClosure", test_switcheach),
+        ("test_switchinArray", test_switchmapArray),
+        ("test_switchinString", test_switchmapString)
     ]
 }

@@ -1,5 +1,5 @@
 //
-//  Switchin.swift
+//  Switch+.swift
 //  
 //
 //  Created by Zach Eriksen on 7/7/20.
@@ -8,7 +8,7 @@
 import Foundation
 
 /**
- # switchin
+ # switchmap
  
  This function allows you to use a `switch` in one line. As this isn't using an actual `switch`, you do not need to supply all the cases of the value. This function only returns one value for one case.
  
@@ -55,7 +55,7 @@ import Foundation
  }
  
  var value: Example = .c
- let switchedValue: String? = switchin(value: value,
+ let switchedValue: String? = switchmap(value: value,
                                       cases: [
                                       .a: "The value was `a`",
                                       .b: "The value was `b`",
@@ -65,7 +65,7 @@ import Foundation
  print(switchedValue) // Optional("The value was `c`")
  ```
  */
-public func switchin<T: Hashable, O>(value: T,
+public func switchmap<T: Hashable, O>(value: T,
                                      cases: [T: O?],
                                      default defaultCase: O? = nil) -> O? {
     
@@ -77,7 +77,7 @@ public func switchin<T: Hashable, O>(value: T,
 }
 
 /**
- # switchin
+ # switcheach
  
  This function allows you to use a `switch` in one line. As this isn't using an actual `switch`, you do not need to supply all the cases of the value.
  
@@ -86,7 +86,7 @@ public func switchin<T: Hashable, O>(value: T,
     - cases: Cases to determine code paths
     - default: Default Case if none of the `cases` succeed
  */
-public func switchin<T: Hashable>(value: T,
+public func switcheach<T: Hashable>(value: T,
                                      cases: [T: () -> Void],
                                      default defaultCase: () -> Void = {}) {
     
@@ -100,9 +100,9 @@ public func switchin<T: Hashable>(value: T,
 public extension Collection where Element: Hashable {
     
     /**
-     switchin
+     switchmap
      
-     `map` over the Collection and `switchin` each value.
+     `map` over the Collection and `switchmap` each value.
      
      - Parameters:
          - cases: Cases to determine code paths
@@ -110,10 +110,10 @@ public extension Collection where Element: Hashable {
      
      - Returns: O
      */
-    func switchin<T>(cases: [Element: T?],
+    func switchmap<T>(cases: [Element: T?],
                      default defaultCase: T? = nil) -> [T?] {
         map {
-            SwiftKit.switchin(value: $0, cases: cases, default: defaultCase)
+            SwiftKit.switchmap(value: $0, cases: cases, default: defaultCase)
         }
     }
 }
