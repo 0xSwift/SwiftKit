@@ -57,6 +57,20 @@ final class SwitchTests: XCTestCase {
         XCTAssertEqual(switchedList, ["one", "two", "three"])
     }
     
+    func test_switcheachArray() {
+        let list = [1, 2, 3]
+        var count = 0
+        
+        list.switcheach(cases: [
+            0: { count += 10 },
+            1: { count += 20 },
+            2: { count += 30 },
+            3: { count += 40 }
+        ], default: { count = -1 })
+        
+        XCTAssertEqual(count, 90)
+    }
+    
     func test_switchmapString() {
         let list = "123"
         
@@ -75,6 +89,7 @@ final class SwitchTests: XCTestCase {
         ("test_switchin", test_switchmap),
         ("test_switchinClosure", test_switcheach),
         ("test_switchinArray", test_switchmapArray),
+        ("test_switcheachArray", test_switcheachArray),
         ("test_switchinString", test_switchmapString)
     ]
 }
