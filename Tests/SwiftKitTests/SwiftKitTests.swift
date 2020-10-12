@@ -1,5 +1,4 @@
 import XCTest
-import UIKit
 @testable import SwiftKit
 
 final class SwiftKitTests: XCTestCase {
